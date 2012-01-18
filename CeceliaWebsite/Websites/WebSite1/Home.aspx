@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="_Default" EnableEventValidation="true" %>
 
+<%@ Register Assembly="obout_Window_NET" Namespace="OboutInc.Window" TagPrefix="owd" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <script type="text/javascript">
@@ -31,10 +33,14 @@
     }
 </script>
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>CM DB</title>
 </head>
+
+
+
 <body style="background-color: Gray;">
     <form id="form1" runat="server">
     <asp:Panel ID="pnlMain" runat="server" Height="100%" Width="100%" HorizontalAlign="Center">
@@ -48,6 +54,9 @@
                 </asp:Table>
             </asp:Panel>
         </div>
+      <owd:Dialog ID="dlgSortError" Width="200" Height="150" StyleFolder ="wdstyles/default" 
+                IsModal="true" runat="server" ShowCloseButton="true">
+    </owd:Dialog>
         <div>
             <asp:Panel ID="pnlContent" runat="server" Width="100%" Height="94%" BackColor="LightGreen" DefaultButton="btnSearch">
                 <asp:Table runat="server" CellPadding="1" CellSpacing="1" Width="100%">
@@ -139,12 +148,12 @@
                                 <asp:TableCell HorizontalAlign="Center">
                                         <asp:RadioButton ID="rdbCompany" runat ="server" GroupName="Search" TabIndex="0" 
                                         onclick = "EnableTextboxes()"/>
-                                        IsCompany
+                                        Company
                                     </asp:TableCell>
                                     <asp:TableCell HorizontalAlign="Center">
                                         <asp:RadioButton ID="rdbCategory" runat="server" GroupName="Search" TabIndex="0" 
                                         onclick = "EnableTextboxes()"/>
-                                        IsCategory
+                                        Category
                                     </asp:TableCell>
                                     <asp:TableCell HorizontalAlign="Center">
                                         <asp:RadioButton ID="rdbAny" runat="server" GroupName="Search" TabIndex="0" 
@@ -156,14 +165,14 @@
                                         onclick = "EnableTextboxes()"/>
                                         Both
                                     </asp:TableCell>
-                                    <asp:TableCell HorizontalAlign="Center"><asp:Label ID="lblCategory" runat="server" Text="Category:" >
-                                    </asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell><asp:TextBox ID="txtCategorySearch" runat="server" TabIndex="0" /> </asp:TableCell>
                                     <asp:TableCell HorizontalAlign="Center"><asp:Label ID="lblCompany" runat="server" Text="Company:" >
                                     </asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell><asp:TextBox ID="txtCompanySearch" runat="server" TabIndex="0" /> </asp:TableCell>
+                                    <asp:TableCell HorizontalAlign="Center"><asp:Label ID="lblCategory" runat="server" Text="Category:" >
+                                    </asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell><asp:TextBox ID="txtCategorySearch" runat="server" TabIndex="0" /> </asp:TableCell>
                                     <asp:TableCell ColumnSpan="2" HorizontalAlign="Center">
                                         <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" TabIndex="0" />
                                     </asp:TableCell>

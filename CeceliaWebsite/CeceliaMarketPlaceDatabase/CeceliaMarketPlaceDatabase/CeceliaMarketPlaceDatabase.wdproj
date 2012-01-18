@@ -41,6 +41,18 @@
       <Project>{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}</Project>
       <Name>CeceliaDataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CeceliaInformationModel\CeceliaInformationModel.csproj">
+      <Project>{0C975B45-CB9A-4A1A-930A-46FB318E56A7}</Project>
+      <Name>CeceliaInformationModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <AssemblyAttributes Include="AssemblyFileVersion">
+      <Value>1.2.0.1</Value>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyVersion">
+      <Value>1.2.0.1</Value>
+    </AssemblyAttributes>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WebDeployment\v9.0\Microsoft.WebDeployment.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

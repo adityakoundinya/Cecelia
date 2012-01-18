@@ -51,7 +51,7 @@ public partial class _Default : System.Web.UI.Page {
             }
 
             lblError.Visible = false;
-
+            dlgSortError.Visible = false;
         } else {
             Response.Redirect("Login.aspx");
         }
@@ -95,12 +95,13 @@ public partial class _Default : System.Web.UI.Page {
             ClearQuickAddProduct();
 
         } else {
-            lblError.Text = "Category, Company or Flavor cannot be empty";
-            lblError.Visible = true;
+            MessageBox("Category, Company or Flavor cannot be empty");
+            //lblError.Text = "Category, Company or Flavor cannot be empty";
+            //lblError.Visible = true;
         }
     }
     protected void btnSearch_Click(object sender, EventArgs e) {
-        if (((txtCompanySearch.Text != string.Empty || txtCategorySearch.Text != string.Empty) &&(rdbCategory.Checked || rdbCompany.Checked)) || 
+        if (((txtCompanySearch.Text != string.Empty || txtCategorySearch.Text != string.Empty) && (rdbCategory.Checked || rdbCompany.Checked)) ||
             (txtCompanySearch.Text != string.Empty && txtCategorySearch.Text != string.Empty && (rdbBoth.Checked || rdbAny.Checked))) {
             lblsearchResults.Visible = true;
             lblSearchBy.Visible = true;
@@ -122,9 +123,9 @@ public partial class _Default : System.Web.UI.Page {
             } else {
                 isSingleFilter = false;
                 if (rdbAny.Checked) {
-                    lblSearchBy.Text = "Search by Category: " + categorysearch + " or Search by Company: " + companysearch;
+                    lblSearchBy.Text = "Search by Company: " + companysearch + " or Search by Category: " + categorysearch;
                 } else {
-                    lblSearchBy.Text = "Search by Category: " + categorysearch + " and Search by Company: " + companysearch;
+                    lblSearchBy.Text = "Search by Company: " + companysearch + " and Search by Category: " + categorysearch;
                 }
             }
             ProductWorker w = new ProductWorker();
@@ -133,7 +134,7 @@ public partial class _Default : System.Web.UI.Page {
             } else if (isSingleFilter && !isCategory) {
                 _Products = w.SearchProduct(companysearch, isCategory);
             } else if (!isSingleFilter) {
-                _Products = w.SearchProduct(categorysearch, companysearch,rdbBoth.Checked);
+                _Products = w.SearchProduct(categorysearch, companysearch, rdbBoth.Checked);
             }
             Session.Add("Products", _Products);
             lblsearchResults.Text = "Search Results: " + this._Products.Count.ToString() + " products found";
@@ -142,11 +143,13 @@ public partial class _Default : System.Web.UI.Page {
             ClearSearchBoxes();
         } else {
             if (txtCompanySearch.Text == string.Empty && txtCategorySearch.Text == string.Empty) {
-                lblError.Text = "Enter a Search String";
-                lblError.Visible = true;
-            } else if((txtCompanySearch.Text != string.Empty && txtCategorySearch.Text != string.Empty && (!rdbBoth.Checked || !rdbAny.Checked))) {
-                lblError.Text = "Select a search criteria";
-                lblError.Visible = true;
+                MessageBox("Enter a Search String");
+            } else if ((txtCompanySearch.Text != string.Empty && txtCategorySearch.Text != string.Empty && (!rdbBoth.Checked || !rdbAny.Checked))) {
+                MessageBox("Check either Any or Both radio button");
+            } else if (txtCategorySearch.Text != string.Empty && txtCompanySearch.Text == string.Empty && !rdbCategory.Checked) {
+                MessageBox("Check Category radio button");
+            } else if (txtCategorySearch.Text == string.Empty && txtCompanySearch.Text != string.Empty && !rdbCompany.Checked) {
+                MessageBox("Check Company radio button");
             }
         }
 
@@ -271,10 +274,8 @@ public partial class _Default : System.Web.UI.Page {
         if (e.SortExpression == "Id" || e.SortExpression == "Category" || e.SortExpression == "CompanyName" || e.SortExpression == "Flavor" ||
             e.SortExpression == "Type1" || e.SortExpression == "Type2" || e.SortExpression == "LastUpdated" || e.SortExpression == "User") {
             Session["Expression"] = e.SortExpression;
-            if (e.SortDirection == SortDirection.Ascending) {
-                Session["IsAscending"] = true;
-            } else {
-                Session["IsAscending"] = false;
+            if (Session["Expression"].ToString() != null && Session["Expression"].ToString() == e.SortExpression) {
+                Session["IsAscending"] = !bool.Parse(Session["IsAscending"].ToString());
             }
         } else {
             MessageBox("Table cannot be sorted on " + e.SortExpression + " column");
@@ -291,8 +292,7 @@ public partial class _Default : System.Web.UI.Page {
 
     private void BindData(List<Product> products) {
         string expression = Session["Expression"].ToString();
-        bool isAscending = true;
-        bool.TryParse(Session["IsAscending"].ToString(), out isAscending);
+        bool isAscending = bool.Parse(Session["IsAscending"].ToString());
         gridView.DataSource = SortProducts(expression, isAscending, products);
         gridView.DataBind();
     }
@@ -306,10 +306,13 @@ public partial class _Default : System.Web.UI.Page {
         gridView.RowUpdating += new GridViewUpdateEventHandler(gridView_RowUpdating);
         BindData(products);
     }
-    private void MessageBox(string msg) {
-        Label lbl = new Label();
-        lbl.Text = "<script language='javascript'>" + Environment.NewLine + "window.alert('" + msg + "')</script>";
-        Page.Controls.Add(lbl);
+    private void MessageBox(string sMessage) {
+        LiteralControl c = new LiteralControl("<center><br />" + sMessage + "<br /><br /><input type='button' value='OK' onclick='dlgSortError.Close()' /></center>");
+        dlgSortError.Controls.Add(c);
+        dlgSortError.Title = "Information Message";
+        dlgSortError.Visible = true;
+        dlgSortError.VisibleOnLoad = true;
+        //form1.Controls.Add(dlgSortError);
     }
     private void ClearQuickAddProduct() {
         txtCompanyName.Text = string.Empty;
