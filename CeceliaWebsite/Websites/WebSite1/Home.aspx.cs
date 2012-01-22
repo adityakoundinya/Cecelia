@@ -25,6 +25,7 @@ public partial class _Default : System.Web.UI.Page {
             Session.Remove("searchType");
             Session.Remove("Expression");
             Session.Remove("IsAscending");
+            Session.Remove("IsSorted");
         }
         if (Session["User"] != null) {
             LoginUser = (Users)Session["User"];
@@ -46,10 +47,12 @@ public partial class _Default : System.Web.UI.Page {
             if (Session["IsAscending"] == null) {
                 Session.Add("IsAscending", true);
             }
+            if (Session["IsSorted"] == null) {
+                Session.Add("IsSorted", false);
+            }
             if (!(bool)(Session["Edit"])) {
                 this.PopulateProducts(this._Products);
             }
-
             lblError.Visible = false;
             dlgSortError.Visible = false;
         } else {
@@ -141,6 +144,8 @@ public partial class _Default : System.Web.UI.Page {
             gridView.PageIndex = 0;
             PopulateProducts(this._Products);
             ClearSearchBoxes();
+            Session.Remove("Expression");
+            Session.Remove("IsAscending");
         } else {
             if (txtCompanySearch.Text == string.Empty && txtCategorySearch.Text == string.Empty) {
                 MessageBox("Enter a Search String");
@@ -277,6 +282,7 @@ public partial class _Default : System.Web.UI.Page {
             if (Session["Expression"].ToString() != null && Session["Expression"].ToString() == e.SortExpression) {
                 Session["IsAscending"] = !bool.Parse(Session["IsAscending"].ToString());
             }
+            Session.Add("IsSorted", false);
         } else {
             MessageBox("Table cannot be sorted on " + e.SortExpression + " column");
             e.Cancel = true;
@@ -338,6 +344,7 @@ public partial class _Default : System.Web.UI.Page {
         txtCompanySearch.BackColor = System.Drawing.Color.White;
     }
     private List<Product> SortProducts(string Expression, bool isAscending, List<Product> products) {
+        if (bool.Parse(Session["IsSorted"].ToString())) return products;
         switch (Expression) {
             case "CompanyName":
                 if (isAscending)
@@ -393,6 +400,7 @@ public partial class _Default : System.Web.UI.Page {
                 products.Sort(delegate(Product p1, Product p2) { return p1.Id.CompareTo(p2.Id); });
                 break;
         }
+        Session.Add("IsSorted", true);
         return products;
     }
     #endregion
