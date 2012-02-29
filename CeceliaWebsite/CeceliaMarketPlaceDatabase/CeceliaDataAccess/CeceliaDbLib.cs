@@ -70,5 +70,13 @@ namespace Cecelia {
                 return new DataTable();
             }
         }
+
+        public DataTable GetUnEditedProducts() {
+            try {
+                return this.ExecuteQuery("GetUnEditedProducts", new object[] { });
+            } catch {
+                return new DataTable();
+            }
+        }
     }
 }

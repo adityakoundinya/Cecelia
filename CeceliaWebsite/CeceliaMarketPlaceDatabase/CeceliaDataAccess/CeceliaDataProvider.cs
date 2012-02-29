@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 /// 
 namespace Cecelia {
     public class CeceliaDataProvider {
-        
+
         CeceliaDbLib _dbLib = null;
 
         #region Public Methods
@@ -31,15 +31,7 @@ namespace Cecelia {
         public List<Product> GetAllProducts() {
             DataTable result = _dbLib.GetAllProducts();
             List<Product> products = this.ParseProducts(result);
-            RegexOptions options = RegexOptions.None;
-            Regex regex = new Regex(@"[ ]{2,}", options);
-            foreach (Product p in products) {
-                p.Category = regex.Replace(p.Category, @" ");
-                p.CompanyName = regex.Replace(p.CompanyName, @" ");
-                p.Flavor = regex.Replace(p.Flavor, @" ");
-                p.Type1 = regex.Replace(p.Type1, @" ");
-                p.Type2 = regex.Replace(p.Type2, @" ");
-            }
+
             return products;
         }
         public bool AddProduct(Product p) {
@@ -84,7 +76,11 @@ namespace Cecelia {
                 return true;
             }
         }
-
+        public List<Product> GetUnEditedProducts() {
+            DataTable result = _dbLib.GetUnEditedProducts();
+            List<Product> products = this.ParseProducts(result);
+            return products;
+        }
         #endregion
 
         #region Private Methods
@@ -142,6 +138,15 @@ namespace Cecelia {
             } catch {
                 p.User = string.Empty;
             }
+
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex(@"[ ]{2,}", options);
+            p.Category = regex.Replace(p.Category, @" ");
+            p.CompanyName = regex.Replace(p.CompanyName, @" ");
+            p.Flavor = regex.Replace(p.Flavor, @" ");
+            p.Type1 = regex.Replace(p.Type1, @" ");
+            p.Type2 = regex.Replace(p.Type2, @" ");
+
             return p;
         }
 
