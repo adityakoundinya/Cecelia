@@ -78,7 +78,16 @@ public partial class _Default : System.Web.UI.Page {
             } else {
                 p.SF = false;
             }
-
+            if (chkCT.Checked) {
+                p.CRT = true;
+            } else {
+                p.CRT = false;
+            }
+            if (chkFC.Checked) {
+                p.FAC = true;
+            } else {
+                p.FAC = false;
+            }
             p.LastUpdated = DateTime.Now;
             p.Type1 = txtType1.Text;
             p.Type2 = txtType2.Text;

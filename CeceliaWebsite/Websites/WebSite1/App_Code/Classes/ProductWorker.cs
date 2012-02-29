@@ -35,5 +35,9 @@ namespace Cecelia {
         public List<Product> GetAllProducts() {
             return _dp.GetAllProducts();
         }
+
+        public List<Product> GetUnEditedProducts() {
+            return _dp.GetUnEditedProducts();
+        }
     }
 }
