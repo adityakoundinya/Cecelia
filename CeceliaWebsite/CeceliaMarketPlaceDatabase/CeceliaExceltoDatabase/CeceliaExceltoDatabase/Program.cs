@@ -20,7 +20,7 @@ namespace Cecelia {
             Product product;
             int rCnt = 0;
             Console.WriteLine("Extracting Products");
-            for (rCnt = 1; rCnt < range.Rows.Count; rCnt++) {
+            for (rCnt = 2; rCnt < range.Rows.Count; rCnt++) {
                 product = new Product();
                 product.Category = GetValueFromCell(rCnt, 1);
                 product.CompanyName = GetValueFromCell(rCnt, 2);
@@ -54,7 +54,7 @@ namespace Cecelia {
         private static string GetValueFromCell(int row, int cell) {
             string value = string.Empty;
             if ((range.Cells[row, cell] as Range).Value2 != null) {
-                value = (range.Cells[row, cell] as Range).Value2.ToString();
+                value = (range.Cells[row, cell] as Range).Value2.ToString().Trim();
             }
             return value;
         }
