@@ -12,14 +12,15 @@ namespace Cecelia {
 
             CeceliaDataProvider dp = new CeceliaDataProvider();
             ApplicationClass applicationClass = new ApplicationClass();
-            Workbook workBook = applicationClass.Workbooks.Open("C:\\Dainis - Master GF Database.xls", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            Workbook workBook = applicationClass.Workbooks.Open("C:\\2012_RX_Final.xls", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
             Worksheet workSheet = (Worksheet)workBook.Worksheets.get_Item(1);
             range = workSheet.UsedRange;
             List<Product> products = new List<Product>();
+            List<Product> unAddedRows = new List<Product>();
             Product product;
             int rCnt = 0;
             Console.WriteLine("Extracting Products");
-            for (rCnt = 2; rCnt < range.Rows.Count; rCnt++) {
+            for (rCnt = 1; rCnt < range.Rows.Count; rCnt++) {
                 product = new Product();
                 product.Category = GetValueFromCell(rCnt, 1);
                 product.CompanyName = GetValueFromCell(rCnt, 2);
@@ -28,6 +29,8 @@ namespace Cecelia {
                 product.Flavor = GetValueFromCell(rCnt, 5);
                 product.LastUpdated = DateTime.Now;
                 if (product.CompanyName == string.Empty && product.Type1 == string.Empty && product.Type2 == string.Empty && product.Flavor == string.Empty) {
+                    product.Id = rCnt;
+                    unAddedRows.Add(product);
                     continue;
                 }
                 products.Add(product);
