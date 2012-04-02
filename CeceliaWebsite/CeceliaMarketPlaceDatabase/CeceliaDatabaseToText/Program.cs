@@ -7,6 +7,8 @@ using System.IO;
 namespace Cecelia {
 
     class Program {
+        static bool isCfOnly = true;
+        static bool isSfOnly = true;
 
         static void Main(string[] args) {
             List<Product> unorderedProducts = new List<Product>();
@@ -15,14 +17,14 @@ namespace Cecelia {
 
             unorderedProducts = dp.GetAllProducts();
 
-            unorderedProducts.RemoveAll(o => o.CF == false);
-            unorderedProducts.RemoveAll(o => o.SF == false);
+            if (isCfOnly) {
+                unorderedProducts.RemoveAll(o => o.CF == false);
+            }
+            if (isSfOnly) {
+                unorderedProducts.RemoveAll(o => o.SF == false);
+            }
 
             List<Category> Products = LoadProducts(unorderedProducts);
-            //
-            //Products.RemoveRange(0, 7);
-            //Products.RemoveRange(1, Products.Count - 1);
-            //Products.RemoveAll(o => o.CategoryName != "Salad Dressing");
 
             WriteToTextFile(Products);
         }
@@ -99,7 +101,7 @@ namespace Cecelia {
                                 if (p.Type2 != string.Empty) {
                                     if (!type1.Type2List.Exists(o => o.Type2Name == p.Type2)) {
                                         if (p.Type2 != string.Empty) {
-                                            
+
                                             Type2 t2 = BuildType2(p);
                                             type1.Type2List.Add(t2);
 
@@ -132,10 +134,7 @@ namespace Cecelia {
         }
 
         private static void WriteToTextFile(List<Category> Products) {
-            TextWriter tw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Cecelia_CF_SF.txt");
-            //Products.RemoveRange(0, 315);
-            //Products.RemoveRange(1, Products.Count - 1);
-            //Products.RemoveAll(o => o.IsFAC == false);
+            TextWriter tw = new StreamWriter(GetPath());
             try {
                 foreach (Category cat in Products) {
                     tw.WriteLine("");
@@ -167,6 +166,28 @@ namespace Cecelia {
                 tw.Flush();
                 tw.Close();
             }
+        }
+
+        private static string GetPath() {
+            string path = string.Empty;
+            string location = @"C:\References\CeceliaArchive\CeceliaExtracts\";
+            string fileName = "Cecelia";
+            string ext = ".txt";
+
+            string dateTime = DateTime.Now.ToShortDateString();
+            dateTime = dateTime.Replace("/","_");
+            string extractKind = string.Empty;
+            if (isCfOnly && !isSfOnly) {
+                extractKind = "CF";
+            } else if (isSfOnly && !isCfOnly) {
+                extractKind = "SF";
+            } else if (isCfOnly && isSfOnly) {
+                extractKind = "CF & SF";
+            } else {
+                extractKind = "GF";
+            }
+            path = location + fileName + "_" + extractKind + "_" + dateTime + ext;
+            return path;
         }
 
         #region Loader Methods
@@ -223,7 +244,7 @@ namespace Cecelia {
             Flavor f = new Flavor();
             f.IsCRT = product.CRT;
             if (f.IsCRT) {
-                f.flavor = product.Flavor + "@";
+                f.flavor = product.Flavor + "~";
             } else {
                 f.flavor = product.Flavor;
             }
@@ -283,6 +304,8 @@ namespace Cecelia {
                             printer += OrderType1Type2(type1.Type1Flavor, type1.Type2List);
                             if ((type1.Type2List.Count + type1.Type1Flavor.Count) > 1) {
                                 printer += ")";
+                            } else if ((type1.Type2List.Count + type1.Type1Flavor.Count) == 1) {
+                                printer += "";
                             } else {
                                 printer += " ";
                             }
@@ -300,6 +323,8 @@ namespace Cecelia {
                             printer += OrderType1Type2(type1.Type1Flavor, type1.Type2List);
                             if ((type1.Type2List.Count + type1.Type1Flavor.Count) > 1) {
                                 printer += ")";
+                            } else if ((type1.Type2List.Count + type1.Type1Flavor.Count) == 1) {
+                                printer += "";
                             } else {
                                 printer += " ";
                             }
@@ -363,7 +388,7 @@ namespace Cecelia {
                             printer += ", " + TypeFlavors[i].flavor;
                         }
                     }
-                    printer += ") ";
+                    printer += ")";
                 } else {
                     printer += " " + TypeFlavors[0].flavor;
                 }
@@ -372,7 +397,7 @@ namespace Cecelia {
             return printer;
         }
         #endregion
-        
+
     }
 
     #region Container Classes
