@@ -171,7 +171,7 @@ namespace Cecelia {
         private static string GetPath() {
             string path = string.Empty;
             string location = @"C:\References\CeceliaArchive\CeceliaExtracts\";
-            string fileName = "Cecelia";
+            string fileName = "Cecelia_wrbfree";
             string ext = ".txt";
 
             string dateTime = DateTime.Now.ToShortDateString();
