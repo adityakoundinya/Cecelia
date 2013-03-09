@@ -39,5 +39,8 @@ namespace Cecelia {
         public List<Product> GetUnEditedProducts() {
             return _dp.GetUnEditedProducts();
         }
+        public int ResetDatabase() {
+            return _dp.ResetDatabase();
+        }
     }
 }

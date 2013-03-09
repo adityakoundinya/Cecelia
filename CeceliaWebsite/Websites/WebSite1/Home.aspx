@@ -67,7 +67,7 @@
                             <asp:Image ID="imgTop" runat="server" ImageUrl="~/Images/spacer.gif" Height="10px"/>
                         </asp:TableCell>
                         <asp:TableCell HorizontalAlign="Right" Width = "25%">
-                            <asp:LinkButton ID="ibAddUser" runat="server" Text="AddUser" ForeColor="Black" OnClick="ibAddUser_Click" Visible="false">
+                            <asp:LinkButton ID="ibAdmin" runat="server" Text="AdminPage" ForeColor="Black" OnClick="ibAdmin_Click" Visible="false">
                             </asp:LinkButton>
                         </asp:TableCell>
                         <asp:TableCell HorizontalAlign="Right" Width = "25%">

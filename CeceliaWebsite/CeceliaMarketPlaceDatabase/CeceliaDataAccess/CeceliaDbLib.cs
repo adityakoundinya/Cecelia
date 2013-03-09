@@ -78,5 +78,13 @@ namespace Cecelia {
                 return new DataTable();
             }
         }
+
+        public int ResetDatabase() {
+            try {
+                return this.ExecuteNonQuery("ResetDatabase", new object[] { });
+            } catch {
+                return -1;
+            }
+        }
     }
 }

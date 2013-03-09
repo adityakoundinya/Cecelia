@@ -81,6 +81,10 @@ namespace Cecelia {
             List<Product> products = this.ParseProducts(result);
             return products;
         }
+        public int ResetDatabase() {
+            int result = _dbLib.ResetDatabase();
+            return result;
+        }
         #endregion
 
         #region Private Methods

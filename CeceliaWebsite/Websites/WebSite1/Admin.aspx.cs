@@ -6,15 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Cecelia;
 
-public partial class AddUser : System.Web.UI.Page {
+public partial class Admin : System.Web.UI.Page {
 
     protected void Page_Load(object sender, EventArgs e)    {
         if (Session["User"] != null) {
+            Users u =(Users) Session["User"];
+            if (u.Role != Role.Admin) {
+                MessageBox("You do not have the permission to view this page. Please relogin.");
+                Response.Redirect("Login.aspx");
+            }
             if (!Page.IsPostBack) {
                 ddlRole.DataSource = Enum.GetNames(typeof(Role));
                 ddlRole.DataBind();
                 ClearTable();
             }
+
+            lblWelcome.Text = "Welcome " + u.UserName;
             lblError.Visible = false;
         } else {
             Response.Redirect("Login.aspx");
@@ -59,5 +66,32 @@ public partial class AddUser : System.Web.UI.Page {
         txtUserName.Text = string.Empty;
         txtVerifyPassword.Text = string.Empty;
         ddlRole.SelectedIndex = -1;
+    }
+
+    private void MessageBox(string sMessage) {
+        LiteralControl c = new LiteralControl("<center><br />" + sMessage + "<br /><br /><input type='button' value='OK' onclick='dlgPageLoadError.Close()' /></center>");
+        dlgPageLoadError.Controls.Add(c);
+        dlgPageLoadError.Title = "Information Message";
+        dlgPageLoadError.Visible = true;
+        dlgPageLoadError.VisibleOnLoad = true;
+        //form1.Controls.Add(dlgSortError);
+    }
+    protected void btnResetDatabase_Click(object sender, EventArgs e) {
+        ProductWorker pw = new ProductWorker();
+        int result = pw.ResetDatabase();
+        if (result > -1) {
+            MessageBox(result.ToString() + " Products were reset");
+        } else {
+            MessageBox("There was an error resetting the database.");
+        }
+    }
+    protected void ibHome_Click(object sender, EventArgs e) {
+        Response.Redirect("Home.aspx");
+    }
+    protected void ibLogout_Click(object sender, EventArgs e) {
+        Session.Remove("User");
+        Session.Remove("Products");
+        Session.Remove("Edit");
+        Response.Redirect("Login.aspx");
     }
 }

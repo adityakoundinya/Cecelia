@@ -31,7 +31,7 @@ public partial class _Default : System.Web.UI.Page {
             LoginUser = (Users)Session["User"];
             lblWelcome.Text = "Welcome " + LoginUser.UserName;
             if (LoginUser.Role == Role.Admin) {
-                ibAddUser.Visible = true;
+                ibAdmin.Visible = true;
             }
             if (Session["Edit"] == null) {
                 Session.Add("Edit", false);
@@ -175,8 +175,8 @@ public partial class _Default : System.Web.UI.Page {
         Session.Remove("Edit");
         Response.Redirect("Login.aspx");
     }
-    protected void ibAddUser_Click(object sender, EventArgs e) {
-        Response.Redirect("AddUser.aspx");
+    protected void ibAdmin_Click(object sender, EventArgs e) {
+        Response.Redirect("Admin.aspx");
     }
     #endregion
 
