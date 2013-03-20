@@ -132,11 +132,10 @@ namespace Cecelia {
             p.FAC = bool.Parse(row["FC"].ToString());
             p.CRT = bool.Parse(row["CT"].ToString());
 
-            try {
-                p.LastUpdated = DateTime.Parse(row["Time"].ToString());
-            } catch {
-                p.LastUpdated = DateTime.MinValue;
-            }
+            DateTime last = DateTime.MinValue;
+            DateTime.TryParse(row["Time"].ToString(), out last);
+            p.LastUpdated = last;
+
             try {
                 p.User = row["User"].ToString();
             } catch {
