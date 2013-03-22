@@ -4,7 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite1", "..\Websites\WebSite1\", "{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
-		ProjectReferences = "{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}|CeceliaDataAccess.dll;{0C975B45-CB9A-4A1A-930A-46FB318E56A7}|CeceliaInformationModel.dll;"
+		ProjectReferences = "{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}|CeceliaDataAccess.dll;{0C975B45-CB9A-4A1A-930A-46FB318E56A7}|CeceliaInformationModel.dll;{0f5c3d83-8af5-4d55-8c77-5765075d27fc}|CeceliaExtract.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Deployment"
 		Debug.AspNetCompiler.PhysicalPath = "..\Websites\WebSite1\"
 		Debug.AspNetCompiler.TargetPath = "Deployment\"

@@ -123,20 +123,11 @@
                         <asp:TableCell HorizontalAlign="Center">
                             <asp:CheckBox ID="chkSF" runat="server" />
                         </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtCategory" runat="server" /> </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtCompanyName" runat="server" /> </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center">
+                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtCategory" runat="server" /> </asp:TableCell><asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtCompanyName" runat="server" /> </asp:TableCell><asp:TableCell HorizontalAlign="Center">
                             <asp:CheckBox ID="chkCT" runat="server" />
-                        </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center">
+                        </asp:TableCell><asp:TableCell HorizontalAlign="Center">
                             <asp:CheckBox ID="chkFC" runat="server" />
-                        </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtType1" runat="server" /> </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtType2" runat="server" /> </asp:TableCell>
-                        <asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtFlavor" runat="server" /> </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-                <asp:Table runat="server" Width="100%">
+                        </asp:TableCell><asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtType1" runat="server" /> </asp:TableCell><asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtType2" runat="server" /> </asp:TableCell><asp:TableCell HorizontalAlign="Center"><asp:TextBox ID="txtFlavor" runat="server" /> </asp:TableCell></asp:TableRow></asp:Table><asp:Table runat="server" Width="100%">
                     <asp:TableRow>
                         <asp:TableCell>
                             <asp:Table runat="server" Width="100%" Height="50px">
@@ -180,19 +171,13 @@
                             </asp:Table>
                         </asp:TableCell><asp:TableCell HorizontalAlign="Center"><asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red">
                         </asp:Label>
-                        </asp:TableCell></asp:TableRow>
-                </asp:Table>
-                <asp:Table runat="server" Width="100%" CellSpacing="1">
+                        </asp:TableCell></asp:TableRow></asp:Table><asp:Table runat="server" Width="100%" CellSpacing="1">
                     <asp:TableHeaderRow>
                         <asp:TableHeaderCell HorizontalAlign="Left">
                             <asp:Label ID="lblsearchResults" runat="server" Text="" Visible="false"></asp:Label>
-                        </asp:TableHeaderCell>
-                        <asp:TableHeaderCell HorizontalAlign="Center">
+                        </asp:TableHeaderCell><asp:TableHeaderCell HorizontalAlign="Center">
                             <asp:Label ID="lblSearchBy" runat="server" Visible="false"></asp:Label>
-                        </asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
-                </asp:Table>
-                <div style="overflow-x: auto; overflow-y: auto; height: 100%">
+                        </asp:TableHeaderCell></asp:TableHeaderRow></asp:Table><div style="overflow-x: auto; overflow-y: auto; height: 100%">
                     <asp:GridView ID="gridView" runat="server" Width="100%" OnRowEditing="gridView_RowEditing" OnRowCancelingEdit="gridView_RowCancelingEdit" 
                     OnRowUpdating="gridView_RowUpdating" OnRowDataBound="gridView_RowDataBound" AllowPaging="True" OnPageIndexChanging="gridView_PageIndexChanging"
                      OnRowDeleting = "gridView_RowDeleting" OnSorting="gridView_ColumnSorting" OnSorted="gridView_ColumnSorted" 
@@ -210,7 +195,8 @@
                 </div>
             </asp:Panel>
         </div>
-    </asp:Panel>
+            <asp:Label ID="lblVersion" runat="server"></asp:Label>
+        </asp:Panel>
     </form>
 </body>
 </html>

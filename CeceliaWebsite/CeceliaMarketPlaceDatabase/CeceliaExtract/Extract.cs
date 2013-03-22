@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Cecelia {
     public class Extract {
 
-        public string GetTextString(bool isCfOnly, bool isSfOnly) {
+        public string GetTextString(bool isCf, bool isSf) {
 
             List<Product> unorderedProducts = new List<Product>();
             CeceliaDataProvider dp = new CeceliaDataProvider();
@@ -16,10 +13,10 @@ namespace Cecelia {
 
             unorderedProducts = dp.GetAllProducts();
 
-            if (isCfOnly) {
+            if (isCf) {
                 unorderedProducts.RemoveAll(o => o.CF == false);
             }
-            if (isSfOnly) {
+            if (isSf) {
                 unorderedProducts.RemoveAll(o => o.SF == false);
             }
 

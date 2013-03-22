@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using Cecelia;
 using System.Data;
 using System.Linq;
+using System.Configuration;
 
 
 public partial class _Default : System.Web.UI.Page {
@@ -28,6 +29,8 @@ public partial class _Default : System.Web.UI.Page {
             Session.Remove("IsSorted");
         }
         if (Session["User"] != null) {
+            this.lblHeader.Text = "CM DB " + ConfigurationManager.AppSettings["WebsiteFor"];
+            this.lblVersion.Text = "Version: " + ConfigurationManager.AppSettings["Version"];
             LoginUser = (Users)Session["User"];
             lblWelcome.Text = "Welcome " + LoginUser.UserName;
             if (LoginUser.Role == Role.Admin) {

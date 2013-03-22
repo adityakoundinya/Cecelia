@@ -121,7 +121,11 @@ namespace Cecelia {
         }
         private Product ParseProduct(DataRow row) {
             Product p = new Product();
-            p.Id = long.Parse(row["Id"].ToString());
+
+            long i = 0;
+            long.TryParse(row["Id"].ToString(), out i);
+            p.Id = i;
+
             p.Category = row["Category"].ToString();
             p.CompanyName = row["Company"].ToString();
             p.Flavor = row["Flavor"].ToString();
@@ -136,10 +140,8 @@ namespace Cecelia {
             DateTime.TryParse(row["Time"].ToString(), out last);
             p.LastUpdated = last;
 
-            try {
+            if (!string.IsNullOrEmpty(row["User"].ToString())) {
                 p.User = row["User"].ToString();
-            } catch {
-                p.User = string.Empty;
             }
 
             RegexOptions options = RegexOptions.None;

@@ -8,11 +8,12 @@
 </head>
 <body style="background-color: Gray">
     <form id="form1" runat="server">
+        <asp:Panel ID="pnlMain" runat="server" Height="100%" Width="100%" HorizontalAlign="Center">
     <div>
         <asp:Panel ID="pnlHeader" runat="server" Width="100%" Height="50px" BackColor="Black" ForeColor="White">
             <asp:Table HorizontalAlign="Center" ID="tblHeader" runat="server">
                 <asp:TableRow>
-                    <asp:TableCell><asp:Label ID="lblHeader" runat="server" Text="Cecelia's Marketplace Database" ForeColor="White" Font-Size="XX-Large"></asp:Label>
+                    <asp:TableCell><asp:Label ID="lblHeader" runat="server" Text="CM DB" ForeColor="White" Font-Size="XX-Large"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
@@ -70,21 +71,64 @@
                     <asp:TableCell HorizontalAlign="Center" ColumnSpan="2"><asp:Label ID="lblError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
                     </asp:TableCell></asp:TableRow><asp:TableRow>
                     <asp:TableCell HorizontalAlign="Center">
-                        <asp:Button ID="btnAddUser" runat="server" Text="Add User" Width="60px" OnClick="btnAddUser_Click" />
+                        <asp:Button ID="btnAddUser" runat="server" Text="Add User" Width="100%" OnClick="btnAddUser_Click" />
                     </asp:TableCell><asp:TableCell HorizontalAlign="Center">
-                        <asp:Button ID="btnCancelUser" runat="server" Text="Cancel" Width="60px" OnClick="btnCancelUser_Click" />
-                    </asp:TableCell></asp:TableRow></asp:Table><asp:Table ID="Table4" runat="server">
+                        <asp:Button ID="btnCancelUser" runat="server" Text="Cancel" Width="100%" OnClick="btnCancelUser_Click" />
+                    </asp:TableCell></asp:TableRow></asp:Table>
+            <asp:Table ID="Table4" runat="server">
                 <asp:TableRow>
                     <asp:TableCell ColumnSpan="2">
                         <asp:Image ID="Image1" ImageUrl="~/Images/spacer.gif" Height="60px" Width="100%" runat="server" />
-                    </asp:TableCell></asp:TableRow></asp:Table><asp:Table ID="Table3" runat="server" HorizontalAlign="Center" BorderStyle="Solid" GridLines="Both" BorderColor="Black">
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Table ID="Table7" runat="server" HorizontalAlign="Center" BorderStyle="Solid" GridLines="Both" BorderColor="Black">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan="3">
+                        <asp:Label ID ="lblGenerateExtract" runat="server" Text="Generate Extracts"></asp:Label>
+                    </asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan ="1">
+                        <asp:Button ID ="btnGF" runat="server" Text="G.F" Width="100%" OnClick="btnExtract_Click" />
+                    </asp:TableHeaderCell>
+                    <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan ="1">
+                        <asp:Button ID ="btnCF" runat="server" Text="C.F" Width="100%" OnClick="btnExtract_Click" />
+                    </asp:TableHeaderCell>
+                    <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan ="1">
+                        <asp:Button ID ="btnCFSF" runat="server" Text="C.F & S.F" Width="100%" OnClick="btnExtract_Click" />
+                    </asp:TableHeaderCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Table ID="Table6" runat="server">
+                <asp:TableRow>
+                    <asp:TableCell ColumnSpan="2">
+                        <asp:Image ID="Image2" ImageUrl="~/Images/spacer.gif" Height="60px" Width="100%" runat="server" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+            <asp:Table ID="Table3" runat="server" HorizontalAlign="Center" BorderStyle="Solid" GridLines="Both" BorderColor="Black">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan="1">
                         <asp:Label ID ="lblResetDatabase" runat="server" Text="Reset Database"></asp:Label>
-                    </asp:TableHeaderCell><asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan ="1">
+                    </asp:TableHeaderCell>
+                    <asp:TableHeaderCell HorizontalAlign ="Center" ColumnSpan ="1">
                         <asp:Button ID ="btnResetDatabase" runat="server" Text="Reset" Width="60px" OnClick="btnResetDatabase_Click" OnClientClick='return confirm("Are you sure?");' />
-                    </asp:TableHeaderCell></asp:TableHeaderRow></asp:Table><asp:Table ID="Table2" runat="server">
+                    </asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+            
+            <asp:Table ID="Table2" runat="server">
                 <asp:TableRow>
                     <asp:TableCell ColumnSpan="2">
                         <asp:Image ID="bottomSpace" ImageUrl="~/Images/spacer.gif" Height="160px" Width="100%" runat="server" />
-                    </asp:TableCell></asp:TableRow></asp:Table></asp:Panel></div></form></body></html>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </asp:Panel>
+    </div>
+        <asp:Label ID="lblVersion" runat="server"></asp:Label>
+            </asp:Panel>
+    </form>
+</body>
+</html>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -20,13 +23,15 @@ public partial class Admin : System.Web.UI.Page {
                 ddlRole.DataBind();
                 ClearTable();
             }
-
+            this.lblHeader.Text = "CM DB " + ConfigurationManager.AppSettings["WebsiteFor"];
+            this.lblVersion.Text = "Version: " + ConfigurationManager.AppSettings["Version"];
             lblWelcome.Text = "Welcome " + u.UserName;
             lblError.Visible = false;
         } else {
             Response.Redirect("Login.aspx");
         } 
     }
+
     protected void btnAddUser_Click(object sender, EventArgs e) {
         if (txtPassword.Text != string.Empty && txtUserId.Text != string.Empty && txtUserName.Text != string.Empty && txtVerifyPassword.Text != string.Empty) {
             if (txtPassword.Text == txtVerifyPassword.Text) {
@@ -60,22 +65,6 @@ public partial class Admin : System.Web.UI.Page {
         Response.Redirect("Home.aspx");
     }
 
-    private void ClearTable() {
-        txtPassword.Text = string.Empty;
-        txtUserId.Text = string.Empty;
-        txtUserName.Text = string.Empty;
-        txtVerifyPassword.Text = string.Empty;
-        ddlRole.SelectedIndex = -1;
-    }
-
-    private void MessageBox(string sMessage) {
-        LiteralControl c = new LiteralControl("<center><br />" + sMessage + "<br /><br /><input type='button' value='OK' onclick='dlgPageLoadError.Close()' /></center>");
-        dlgPageLoadError.Controls.Add(c);
-        dlgPageLoadError.Title = "Information Message";
-        dlgPageLoadError.Visible = true;
-        dlgPageLoadError.VisibleOnLoad = true;
-        //form1.Controls.Add(dlgSortError);
-    }
     protected void btnResetDatabase_Click(object sender, EventArgs e) {
         ProductWorker pw = new ProductWorker();
         int result = pw.ResetDatabase();
@@ -85,6 +74,7 @@ public partial class Admin : System.Web.UI.Page {
             MessageBox("There was an error resetting the database.");
         }
     }
+
     protected void ibHome_Click(object sender, EventArgs e) {
         Response.Redirect("Home.aspx");
     }
@@ -93,5 +83,80 @@ public partial class Admin : System.Web.UI.Page {
         Session.Remove("Products");
         Session.Remove("Edit");
         Response.Redirect("Login.aspx");
+    }
+
+    protected void btnExtract_Click(object sender, EventArgs e) {
+        bool isCF = false;
+        bool isSF = false;
+
+        string buttonPressed = ((Button)sender).Text;
+
+        switch (buttonPressed) {
+            case "G.F":
+                isCF = false;
+                isSF = false;
+                break;
+            case "C.F":
+                isCF = true;
+                break;
+            case "C.F & S.F":
+                isCF = true;
+                isSF = true;
+                break;
+            default:
+                return;
+        }
+
+        Extract ex = new Extract();
+        string extract = ex.GetTextString(isCF, isSF);
+
+        Response.Clear();
+
+        string fileName = GetFileName(isCF, isSF);
+
+        Response.ContentType = "text/plain";
+        Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+
+        using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.UTF8)) {
+            writer.Write(extract);
+        }
+        Response.End();
+    }
+
+    private void ClearTable() {
+        txtPassword.Text = string.Empty;
+        txtUserId.Text = string.Empty;
+        txtUserName.Text = string.Empty;
+        txtVerifyPassword.Text = string.Empty;
+        ddlRole.SelectedIndex = -1;
+    }
+    private void MessageBox(string sMessage) {
+        LiteralControl c = new LiteralControl("<center><br />" + sMessage + "<br /><br /><input type='button' value='OK' onclick='dlgPageLoadError.Close()' /></center>");
+        dlgPageLoadError.Controls.Add(c);
+        dlgPageLoadError.Title = "Information Message";
+        dlgPageLoadError.Visible = true;
+        dlgPageLoadError.VisibleOnLoad = true;
+        //form1.Controls.Add(dlgSortError);
+    }
+    private string GetFileName(bool isCF, bool isSF) {
+        string path = string.Empty;
+        string fileName = "Cecelia";
+        string websiteFor = ConfigurationManager.AppSettings["WebsiteFor"];
+        string ext = ".txt";
+
+        string dateTime = DateTime.Now.ToShortDateString();
+        dateTime = dateTime.Replace("/", "_");
+        string extractKind = string.Empty;
+        if (isCF && !isSF) {
+            extractKind = "CF";
+        } else if (isSF && !isCF) {
+            extractKind = "SF";
+        } else if (isCF && isSF) {
+            extractKind = "CF & SF";
+        } else {
+            extractKind = "GF";
+        }
+        path = fileName + "_" + websiteFor + "_" + extractKind + "_" + dateTime + ext;
+        return path;
     }
 }

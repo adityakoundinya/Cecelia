@@ -6,11 +6,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using Cecelia;
+using System.Configuration;
 
 
 public partial class Login : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
+        this.lblHeader.Text = "CM DB " + ConfigurationManager.AppSettings["WebsiteFor"];
+        this.lblVersion.Text = "Version: " + ConfigurationManager.AppSettings["Version"];
         lblLoginError.Visible = false;
+        txtUserName.Focus();
         //txtUserName.Text = "aditya.koundinya";
         //txtPassWord.Text = "123";
     }
