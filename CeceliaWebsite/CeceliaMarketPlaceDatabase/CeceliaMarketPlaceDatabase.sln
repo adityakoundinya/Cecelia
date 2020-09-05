@@ -1,29 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite1", "..\Websites\WebSite1\", "{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
-		ProjectReferences = "{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}|CeceliaDataAccess.dll;{0C975B45-CB9A-4A1A-930A-46FB318E56A7}|CeceliaInformationModel.dll;{0f5c3d83-8af5-4d55-8c77-5765075d27fc}|CeceliaExtract.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/Deployment"
-		Debug.AspNetCompiler.PhysicalPath = "..\Websites\WebSite1\"
-		Debug.AspNetCompiler.TargetPath = "Deployment\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/Deployment"
-		Release.AspNetCompiler.PhysicalPath = "..\Websites\WebSite1\"
-		Release.AspNetCompiler.TargetPath = "Deployment\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1061"
-		VWDDynamicPort = "false"
-		VWDVirtualPath = "/CeceliaMarketplaceDatabase"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeceliaDataAccess", "CeceliaDataAccess\CeceliaDataAccess.csproj", "{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeceliaInformationModel", "CeceliaInformationModel\CeceliaInformationModel.csproj", "{0C975B45-CB9A-4A1A-930A-46FB318E56A7}"
@@ -34,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeceliaDatabaseToText", "Ce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeceliaExtract", "CeceliaExtract\CeceliaExtract.csproj", "{0F5C3D83-8AF5-4D55-8C77-5765075D27FC}"
 EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "", "..\Websites\WebSite1", "{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,14 +21,6 @@ Global
 		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A7A2B422-F04A-49B2-82AC-2CF1CCC99804}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCC6EF2B-B26F-49B5-8256-7B74920B79AC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -90,6 +61,14 @@ Global
 		{0F5C3D83-8AF5-4D55-8C77-5765075D27FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F5C3D83-8AF5-4D55-8C77-5765075D27FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0F5C3D83-8AF5-4D55-8C77-5765075D27FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{62B75E72-3635-4F6B-A0B9-DAA9C39AB33A}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
